@@ -85,11 +85,12 @@ int vector_empty(struct vector *v);
 #define vector_push_back(v, e) _vector_push_back(v, (void *)&e, sizeof(e))
 void vector_pop_back(struct vector *v);
 #if defined (__linux__) || defined (__CYGWIN__)
+// malloc need free
 #define vector_back(v, type_t) \
     ({ \
-        type_t __tmp; \
+        type_t *__tmp = (type_t *)malloc(sizeof(type_t)); \
         memcpy(&__tmp, vector_last(v), v->type_size); \
-        &__tmp; \
+        __tmp; \
     })
 #else
 #define vector_back(v, type_t) (type_t *)vector_last(v)
