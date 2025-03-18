@@ -536,7 +536,7 @@ static void process_wq(void *arg)
     struct wq_arg *wq = (struct wq_arg *)arg;
     struct rpc_session *session = &wq->session;
     struct rpc_packet pkt;
-    if (&wq->handler) {
+    if (wq->handler.cb != NULL) {
         wq->handler.cb(session, wq->ibuf, wq->ilen, &wq->obuf, &wq->olen);
         if (IS_RPC_MSG_NEED_RETURN(wq->handler.msg_id)) {
             pack_msg(&pkt, 0, session->uuid_src, wq->handler.msg_id, wq->obuf, wq->olen);

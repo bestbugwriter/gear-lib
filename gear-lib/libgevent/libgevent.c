@@ -201,7 +201,7 @@ void gevent_base_loop_break(struct gevent_base *eb)
 
 void gevent_base_signal(struct gevent_base *eb)
 {
-    uint64_t notify;
+    uint64_t notify = 0L;
     if (sizeof(uint64_t) != write(eb->inner_fd, &notify, sizeof(uint64_t))) {
         perror("write error");
     }

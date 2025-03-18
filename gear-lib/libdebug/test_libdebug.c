@@ -29,7 +29,6 @@ static void foo(void)
     *tmp = 0;
     printf("xxx=%s\n", tmp);
     free(tmp);
-    free(tmp);
 }
 
 static void foo2(void)
